@@ -1,82 +1,70 @@
-﻿@model AirplaneTracker.Models.Airplanes
+﻿@model IEnumerable<AirplaneTracker.Models.Airplanes>
 
 @{
-    ViewBag.Title = "Edit";
-}
-@*<script type="text/javascript">
-        $(document).ready(function() {
-            $("#div4").prop("disabled",true);
-
-           } );
-
-
-    </script>*@
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-
-    <div id="div1" class="form-horizontal">
-        <h4>Airplanes</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
-         <div id="div2 " class="form-group">
-            @Html.HiddenFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        </div>
-        <h2>Transfer Airplane @Model.name to the following airport</h2>
-        
-
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.AirplaneType, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        </div>
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.maxpass, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        </div>
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.size, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.currentAirport, "Transfer to :", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("currentAirport", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.currentAirport, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.currentpilot, new { @class = "control-label col-md-2" })
-
-        </div>
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.currentcopilot, new { @class = "control-label col-md-2" })
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Transfer" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    ViewBag.Title = "TransferAirplane";
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<h2>TransferAirplane</h2>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxpass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblAirplaneType.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Airports.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblpilots.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblpilots1.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxpass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblAirplaneType.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Airports.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblpilots.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblpilots1.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Transfer to this Airport", "TransferAirplane","Airports", new { id = item.id },null)
+        </td>
+    </tr>
 }
+
+</table>

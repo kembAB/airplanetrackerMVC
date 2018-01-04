@@ -1,17 +1,16 @@
 ﻿@{
     ViewBag.Title = "Airport management system";
 }
-<div class="col-md-4">
 
-   <h2>@Html.ActionLink(" Go to Airplanes   page", "Index", "Airplanes")</h2> 
-    
-
-</div>
 <div class="jumbotron">
-   
+   @*<h1>@Html.ActionLink("Airports","Index","Airports")</h1>**@
     @Html.Action("Index", "Airports")
    
 </div>
 
 
   
+ <div class="col-md-4">
+   @*<h2>@Html.ActionLink("Airplanes", "Index", "Airplanes")</h2>*@ 
+    
+</div>

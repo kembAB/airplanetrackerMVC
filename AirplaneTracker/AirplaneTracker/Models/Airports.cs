@@ -11,8 +11,7 @@ namespace AirplaneTracker.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Airports
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +19,9 @@ namespace AirplaneTracker.Models
         {
             this.Airplanes = new HashSet<Airplanes>();
         }
-       [Key]
-       [Range(1,10000,ErrorMessage ="id cannot be negative ")]
-       [Required(ErrorMessage ="id is required and and is to be unique and positive")]
+    
         public int id { get; set; }
-        [Required(ErrorMessage = "name is required")]
         public string name { get; set; }
-        [Required(ErrorMessage ="city is required")]
         public string city { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

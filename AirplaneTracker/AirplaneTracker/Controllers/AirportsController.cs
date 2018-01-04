@@ -14,7 +14,10 @@ namespace AirplaneTracker.Controllers
     public class AirportsController : Controller
     {
         private mvcAssignmentEntities db = new mvcAssignmentEntities();
-      
+        public ActionResult TransferAirplane(Airports id)
+        {
+            return View();
+        }
         // GET: Airports
         public ActionResult Index()
         {

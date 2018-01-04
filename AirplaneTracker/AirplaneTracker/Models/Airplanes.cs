@@ -10,43 +10,34 @@
 namespace AirplaneTracker.Models
 {
     using System;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    //[MetadataType(typeof(AirplanesMetadata))]
+    [MetadataType(typeof(AirplanesMetadata))]
     public partial class Airplanes
     {
         public int id { get; set; }
-        [Required]
-        [StringLength(50)]
         public string name { get; set; }
-        public int? AirplaneType { get; set; }
-        [DisplayName("Maximum passengers")]
-        [Range(1,1000,ErrorMessage ="passengers can not be more than 1000")]
-        public int? maxpass { get; set; }
-        [Range(1, 100, ErrorMessage = "input out of range,100")]
-        public int? size { get; set; }
-        public int? currentAirport { get; set; }
+        public Nullable<int> AirplaneType { get; set; }
+        public Nullable<int> maxpass { get; set; }
+        public Nullable<int> size { get; set; }
+        public Nullable<int> currentAirport { get; set; }
         //[Display(Name = "current pilot")]
-        public int? currentpilot { get; set; }
+        public Nullable<int> currentpilot { get; set; }
         //[Display(Name = "current copilot")]
-        //[Display(Name = "current pilot")]
-        public int? currentcopilot { get; set; }
-
-     
+        public Nullable<int> currentcopilot { get; set; }
+    
         public virtual AirplaneType tblAirplaneType { get; set; }
         public virtual Airports Airports { get; set; }
-        //[Display(Name = "current pilot")]
-        
+       // [Display(Name = "current pilot")]
         public virtual pilots tblpilots { get; set; }
-        //[Display(Name = "current copilot")]
+       // [Display(Name = "current copilot")]
         public virtual pilots tblpilots1 { get; set; }
         //public int AirportID { get; set; }
     }
-    //public class AirplanesMetadata
-    //{
-    //    [Display(Name = "current pilot")]
-    //    public int? currentpilot { get; set; }
-    //    [Display(Name = "current copilot")]
-    //    public int? currentcopilot { get; set; }
-    //}
+    public class AirplanesMetadata
+    {
+        [Display(Name = "current pilot")]
+        public int? currentpilot { get; set; }
+        [Display(Name = "current copilot")]
+        public int? currentcopilot { get; set; }
+    }
 }

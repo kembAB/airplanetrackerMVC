@@ -47,7 +47,7 @@
                     <td>
                        
                         @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                     @* the following link sends the airport id to be compared with the airplne currentAirport column , AirportsAirplanes action of Airplanes controller *@
+                     
                         @Html.ActionLink("Details ", "AirportsAirplanes", "Airplanes" ,new { id = item.id },null)|
                     
                           @Html.ActionLink("Delete", "Delete", new { id = item.id })

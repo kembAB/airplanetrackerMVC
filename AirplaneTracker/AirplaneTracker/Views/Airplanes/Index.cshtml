@@ -1,7 +1,6 @@
 ﻿@using AirplaneTracker.Models;
 @model IEnumerable<Airplanes>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 @{
     ViewBag.Title = "Welcome to Airplanes Page";
 }
@@ -11,13 +10,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-<table id="table1" class="table">
-    
+<table class="table">
     <tr>
         <th>
-          @* @Html.LabelFor(model => model.pilots.name, "currentpilot", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @*@Html.LabelFor(model => model.name,"myname")*@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
@@ -68,12 +63,10 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id }) |
-                @Html.ActionLink("Transfer Airplane", "TransferAirplane","Airplanes", new { id = item.id },null)
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
             </td>
-
         </tr>
-
+       
     }
 
 </table>

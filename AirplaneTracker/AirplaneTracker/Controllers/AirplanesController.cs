@@ -13,69 +13,39 @@ namespace AirplaneTracker.Controllers
     public class AirplanesController : Controller
     {
         private mvcAssignmentEntities db = new mvcAssignmentEntities();
+        //public ActionResult AirplanesListinTheCurrentAirport(Airports id )
+        //{
+        //    var query = (from se in db.Airports
+        //                 join ew in db.Airplanes
+        //                 on se.id equals ew.currentAirport
+        //                 select new { Airport = se.name, Airplanes = ew.name }).ToList();
+        //    return View(query);
+
+        //}
+        public ActionResult TransferAirplane(Airplanes  id  )
+        {
+            return View();
+        }
+        
+        // GET: Airplanes
+        public ActionResult AirportsAirplanes(int id)
+        {
+          
+            List<Airplanes> airplanes = db.Airplanes.Where(exp => exp.currentAirport == id).ToList();
+          
+            return View(airplanes);
+        }
 
         public ActionResult Index()
         {
             var airplanes = db.Airplanes.Include(a => a.tblAirplaneType).Include(a => a.Airports).Include(a => a.tblpilots).Include(a => a.tblpilots1);
             return View(airplanes.ToList());
         }
-
-        // GET: Airplanes
-        public ActionResult AirportsAirplanes(int? id)
+        public ActionResult TransferAirplane()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            List<Airplanes> airplanes = db.Airplanes.Where(exp => exp.currentAirport == id).ToList();
-            if (airplanes == null)
-            {
-                return HttpNotFound();
-            }
-           
-          
-            return View(airplanes);
+            //var airportlist = db.Airports.Include(a => a.Airplanes);
+            return View(db.Airports.ToList());
         }
-        public ActionResult TransferAirplane(int? id)
-        {
-            
-            ViewBag.currentAirport = new SelectList(db.Airplanes, "id", "currentAirport");
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Airplanes airplanes = db.Airplanes.Find(id);
-            if (airplanes == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.AirplaneType = new SelectList(db.tblAirplaneType, "id", "name", airplanes.AirplaneType);
-            ViewBag.currentAirport = new SelectList(db.Airports, "id", "name", airplanes.currentAirport);
-            ViewBag.currentpilot = new SelectList(db.tblpilots, "id", "name", airplanes.currentpilot);
-            ViewBag.currentcopilot = new SelectList(db.tblpilots, "id", "name", airplanes.currentcopilot);
-            return View(airplanes);
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult TransferAirplane([Bind(Include = "id,name,AirplaneType,maxpass,size,currentAirport,currentpilot,currentcopilot")] Airplanes airplanes)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(airplanes).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.AirplaneType = new SelectList(db.tblAirplaneType, "id", "name", airplanes.AirplaneType);
-            ViewBag.currentAirport = new SelectList(db.Airports, "id", "name", airplanes.currentAirport);
-            ViewBag.currentpilot = new SelectList(db.tblpilots, "id", "name", airplanes.currentpilot);
-            ViewBag.currentcopilot = new SelectList(db.tblpilots, "id", "name", airplanes.currentcopilot);
-            return View(airplanes);
-        }
-
-
-
         // GET: Airplanes/Details/5
         public ActionResult Details(int? id)
         {
